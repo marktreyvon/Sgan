@@ -72,7 +72,7 @@ class tcp():
         self.ack = 0
         self.psh = 0
         self.rst = 0
-        self.syn = 1
+        self.syn = 0
         self.fin = 0
         self.window = socket.htons(6666)
         self.checksum = 0
@@ -204,10 +204,11 @@ def syn_scan(ip, portlis):
 
 
 if __name__ == '__main__':
-    iip = '123.206.9.135'
-    syn_scan_single(iip, 80)
+    iip = '172.19.143.45'
+    # syn_scan_single(iip,80)
     syn_scan_single(iip, 9991)
-    syn_scan_single(iip, 135)
-    syn_scan_single(iip, 139)
-    syn_scan_single(iip, 3389)
-    syn_scan_single(iip, 445)
+    syn_scan_single(iip, 9992)
+    # syn_scan_single(iip,135)
+    # syn_scan_single(iip,139)
+    # syn_scan_single(iip,3389)
+    # syn_scan_single(iip,445)

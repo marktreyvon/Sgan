@@ -1,6 +1,5 @@
 import socket,time,threading as th
 
-
 def get_host_ip():
     try:
         ss = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
@@ -26,27 +25,28 @@ def tcp_scan(ip,port):
         tcp_connection_scan(ip,int(port[i]))
 
 if __name__ == '__main__':
-    ip = get_host_ip()
+    # ip = get_host_ip()
+    ip = '172.19.143.45'
     t = time.time()
     print('IP:',ip)
-    port = [135,138,9999,9991,445,1080]
-    # tcp_scan(ip,port)
+    portlis= [135,138,9999,9991,445,1080]
+    port = 9991
+    tcp_connection_scan(ip,port)
 
     # initial the whole port:
-    all_port = []
-    sum = 1000
-    for i in range(100):
-        temp = []
-        all_port.append(temp)
-    for i in range(sum):
-        num = i%100
-        all_port[num].append(i)
+    # all_port = []
+    # sum = 1000
+    # for i in range(100):
+    #     temp = []
+    #     all_port.append(temp)
+    # for i in range(sum):
+    #     num = i%100
+    #     all_port[num].append(i)
 
-
-    # bind the thread:
-    for i in range(100):
-        t0 = th.Thread(target=tcp_scan(ip,all_port[i]))
-        t0.start()
+    # # bind the thread:
+    # for i in range(100):
+    #     t0 = th.Thread(target=tcp_scan(ip,all_port[i]))
+    #     t0.start()
     now = time.time()
     now = now-t
     print()

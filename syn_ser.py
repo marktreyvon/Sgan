@@ -13,6 +13,7 @@ ipPort = (get_host_ip(),9991)
 s = socket.socket()
 s.bind(ipPort)
 s.listen()
+print(ipPort)
 print('listening...')
 
 while 1:
