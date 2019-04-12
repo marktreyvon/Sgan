@@ -11,7 +11,8 @@ def get_host_ip():
     return str(ip)
 
 s = socket.socket()
-ip = (get_host_ip(),9991)
+ip = (get_host_ip(),9999)
+print('listen: ',ip)
 s.bind(ip)
 s.listen()
 while 1:
