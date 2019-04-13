@@ -99,11 +99,34 @@
 # if __name__ == '__main__':
 #     do('192.168.1.1')
 # # [p = 30, 2, left]
-import socket,struct
-s = socket.ntohs(0x0800)
-print(s,type(s))
-s = b'asd111'
-pkt = struct.pack('6s',s)
-print(pkt,type(pkt))
-un = struct.unpack(str(len(pkt))+'s',pkt)
-print(un,type(un))
+# import socket,struct
+# s = socket.ntohs(0x0800)
+# print(s,type(s))
+# s = b'asd111'
+# pkt = struct.pack('6s',s)
+# print(pkt,type(pkt))
+# un = struct.unpack(str(len(pkt))+'s',pkt)
+# print(un,type(un))
+#
+# import time
+# print(time.get_clock_info('time'))
+# print(time.gmtime())
+# print(time.localtime())
+# print()
+# t = time.ctime()
+# print(t)
+# print(42*'2')
+# t = '-'.join(t.split())
+# # yy = time.
+# # t = t.join('-')
+# print(t)
+# t = time.strftime('%Y-%m-%d-%H-%M-%S',time.localtime())
+# print(t)
+
+s ="|{:^12s}|{:15s}|{:20s}|".format('port','status','service')
+print(51*'-')
+print(s)
+r = [[1,'open'],[3,'open|filtered']]
+for i in r:
+    print("|{:^12s}|{:15s}|{:20}|".format(str(i[0]),i[1],20*' '))
+print(51*'-')
