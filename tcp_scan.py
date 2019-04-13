@@ -9,20 +9,26 @@ def get_host_ip():
         ss.close()
     return str(ip)
 
-def tcp_connection_scan(ip,port):
+def tcp_scan_single(ip,port):
+    result = []
     s = socket.socket()
     tar = (ip,port)
     try:
         s.connect(tar)
+    except socket.timeout:
+        result.append([tar[1],'close|filtered'])
     except Exception:
-        print(tar[1], 'is close')
+        result.append([tar[1],'close'])
     else:
-        print(tar[1], 'is open')
+        result.append([tar[1], 'open'])
     finally:
         s.close()
+    return result
 def tcp_scan(ip,port):
+    result = []
     for i in range(len(port)):
-        tcp_connection_scan(ip,int(port[i]))
+        result += tcp_scan_single(ip,int(port[i]))
+    return result
 
 if __name__ == '__main__':
     # ip = get_host_ip()
@@ -31,7 +37,7 @@ if __name__ == '__main__':
     print('IP:',ip)
     portlis= [135,138,9999,9991,445,1080]
     port = 9991
-    tcp_connection_scan(ip,port)
+    tcp_scan_single(ip,port)
 
     # initial the whole port:
     # all_port = []

@@ -143,12 +143,13 @@ def check_synack(s, des_ip, des_port):
 
 
 def syn_scan_single(des_ip, des_port):
+    result_list = []
     src_ip = get_host_ip()
     s = socket.socket(socket.AF_INET, socket.SOCK_RAW, socket.IPPROTO_RAW)
     # pack:
     ipobj = ip(src_ip, des_ip)
     iph = ipobj.pack()
-    src_port = 6666
+    src_port = 9999
     tcpobj = tcp(src_port, des_port)
     tcph = tcpobj.pack(ipobj.source, ipobj.destination)
     packet = iph + tcph
@@ -164,6 +165,7 @@ def syn_scan_single(des_ip, des_port):
     try:
         pkt = raw_socket.recv(1024)
     except Exception as e:
+        # print(e)
         pass
     timeout = 3  # test 2 times whether recevied the right packet
     while timeout > 0 or not pkt:
@@ -176,7 +178,7 @@ def syn_scan_single(des_ip, des_port):
                 pkt = raw_socket.recv(1024)
             except Exception as e:
                 if timeout == 1:
-                    print(des_port, 'is filtered')
+                    result.append([des_port, 'filtered'])
                     return
             continue
         else:
@@ -190,18 +192,19 @@ def syn_scan_single(des_ip, des_port):
     raw_socket.close()
     s.close()
     if not pkt:
-        print(des_port, ' is close')
+        result.append([des_port, 'close'])
         return
     if result:
-        print(des_port, ' is open')
+        result.append([des_port, 'open'])
     else:
-        print(des_port, ' is close')
-
+        result.append([des_port, 'close'])
+    return result
 
 def syn_scan(ip, portlis):
+    result = []
     for i in range(len(portlis)):
-        syn_scan_single(ip, int(portlis[i]))
-
+        result += syn_scan_single(ip, int(portlis[i]))
+    return result
 
 if __name__ == '__main__':
     iip = '123.206.9.135'

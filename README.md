@@ -18,7 +18,7 @@
 
 ## 遇到的问题：
 1. Windows系统不支持通过socket.PF_PACKET从数据链路层获取数据包，需要另寻他法。这意味着SYN扫描在Windows上不能得到正确的结果
-2. Windows系统并不完全遵守RFC793，这意味着NULL、FIN扫描Windows得不到正确的/准确的结果；
+2. Windows系统并不完全遵守RFC793，这意味着NULL、FIN扫描Windows得不到正确的/准确的结果；并且UDP扫描不会发送ICMP端口不可达消息；
 3. 端口扫描有一定误报率，次数少结果不确定，次数多容易ban IP；
 
 ## 参考文献：

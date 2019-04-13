@@ -29,7 +29,7 @@ def create_udp_client(des_addr,src_addr=(get_host_ip(),9999)):
         print('closed')
 
 
-def create_udp_server(src_addr=(get_host_ip(),9999)):
+def create_udp_server(src_addr=('172.19.88.5',9999)):
     s = socket.socket(socket.AF_INET,socket.SOCK_DGRAM)
     s.bind(src_addr)
     print(src_addr,' is listening')
@@ -46,4 +46,13 @@ def create_udp_server(src_addr=(get_host_ip(),9999)):
     finally:
         ns.close()
         print('closed')
+def send_udp_pkt(des_addr):
+    s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+    s.sendto(b'', des_addr)
+    addr = s.getsockname()
+    s.close()
+    return addr
 
+# addr = ('192.168.90.130',54817)
+# print(send_udp_pkt(addr))
+create_udp_server()

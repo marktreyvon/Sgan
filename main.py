@@ -1,5 +1,6 @@
 from syn_scan import *
 from tcp_scan import *
+from udp_scan import *
 import argparse
 
 title = """
@@ -30,6 +31,21 @@ def analysis_port(d):
     else:
         return [s]
 
+def output(des,result,method,cost,is_default_port=0):
+    print('scan info: IP:', des[0])
+    if is_default_port:
+        print('use default port lists')
+    if method == 'tcp':
+        print('scan method: TCP connect()')
+    elif method == 'syn':
+        print('scan method: TCP SYN')
+    elif method == 'udp':
+        print('scan method: UDP scan')
+    for i in range(len(result)):
+        print(result[i][0],result[i][1])
+
+    print()
+    print('total time cost: ', cost, 'Seconds')
 
 if __name__ == '__main__':
     print(title)
@@ -38,7 +54,7 @@ if __name__ == '__main__':
                                    usage='%(prog)s [options] IPaddres')
     pars.add_argument('-v', '--version', action='version', version='%(prog)s 0.1')
     pars.add_argument('des_ip', type=str, help='destination IP addres')
-    pars.add_argument('method', type=str, default='tcp', help='scan method (default : SYN scan)', nargs='?')
+    pars.add_argument('method', type=str, default='tcp', help='scan method (default : TCP scan)', nargs='?')
     pars.add_argument('-p', help='choose the port you want to scan ,eg: 1-255(range) 1,2,3(specific) 255(single)',
                       nargs=1)
     args_list = pars.parse_args()
@@ -53,35 +69,41 @@ if __name__ == '__main__':
     des_ip = args_list.des_ip
     method = args_list.method
     des_port = args_list.p
+    is_default_port = 0
     try:
         if not des_port:
-            print('use default port list')
             des_port = default_port
+            is_default_port = 1
         else:
             des_port = list(analysis_port(des_port))
         if '.' not in des_ip:
             print('IP address format error, eg: 1.1.1.1')
             raise Exception
     except Exception:
-        print('error')
+        print('An unexpected error has occurred')
         pars.print_help()
         exit()
 
     # scan begin
+    result = []
     t = time.time()
-    print('scan info: IP:', des_ip)
     if method == 'tcp':
-        print('scan method: tcp connec()')
-        tcp_scan(des_ip, des_port)
+        result = tcp_scan(des_ip, des_port)
     elif method == 'syn':
-        print('scan method: tcp SYN')
-        syn_scan(des_ip, des_port)
+        result = syn_scan(des_ip, des_port)
+    elif method == 'udp':
+        result = udp_scan(des_ip, des_port)
     else:
         print('method error')
+        pars.print_help()
+        exit()
     now = time.time()
     now = now - t
-    print()
-    print('total time cost: ', now, 'Seconds')
+    if is_default_port:
+        output([des_ip,des_port],result,method,now,1)
+    else:
+        output([des_ip, des_port], result, method, now)
+
 
 
 
