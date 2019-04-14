@@ -79,7 +79,7 @@ if __name__ == '__main__':
     des_port = args_list.port
     is_default_port = 0
     is_save_result = args_list.is_save
-    thread_num = args_list.threads[0]
+    thread_num = args_list.threads
     try:
         if not des_port:
             des_port = default_port

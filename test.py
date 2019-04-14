@@ -123,10 +123,18 @@
 # t = time.strftime('%Y-%m-%d-%H-%M-%S',time.localtime())
 # print(t)
 
-s ="|{:^12s}|{:15s}|{:20s}|".format('port','status','service')
-print(51*'-')
-print(s)
-r = [[1,'open'],[3,'open|filtered']]
-for i in r:
-    print("|{:^12s}|{:15s}|{:20}|".format(str(i[0]),i[1],20*' '))
-print(51*'-')
+# s ="|{:^12s}|{:15s}|{:20s}|".format('port','status','service')
+# print(51*'-')
+# print(s)
+# r = [[1,'open'],[3,'open|filtered']]
+# for i in r:
+#     print("|{:^12s}|{:15s}|{:20}|".format(str(i[0]),i[1],20*' '))
+# print(51*'-')
+
+import stackless
+
+def show():
+    print(111)
+
+st = stackless.tasklet(show)()
+print(st.alive)
