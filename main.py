@@ -60,14 +60,15 @@ def output(result,method,cost):
 if __name__ == '__main__':
     print(title)
 
+    # parameter init
     pars = argparse.ArgumentParser(prog='Sgan', description='A simple scanner, a wheel just like Nmap', add_help=True,
-                                   usage='%(prog)s [options] IPaddres')
+                                   usage='python3 %(prog)s.py IPaddres [Method] [Options]')
+    pars.add_argument('des_ip', type=str, help='Destination IP addres')
     pars.add_argument('-v', '--version', action='version', version='%(prog)s 0.1')
-    pars.add_argument('des_ip', type=str, help='destination IP addres')
-    pars.add_argument('method', type=str, default='tcp', help='scan method (default : TCP scan)', nargs='?')
-    pars.add_argument('-t', type=int, default=1, dest='threads', help='num of scan threads  (default : 1)', nargs=1)
-    pars.add_argument('-o', '--output', action='store_true', default=False, dest='is_save', help='use this parameter to save your scan result as text')
-    pars.add_argument('-p', dest='port', help='choose the port you want to scan ,eg: 1-255(range) 1,2,3(specific) 255(single)',
+    pars.add_argument('method', type=str, default='tcp', help='Scan method (default : TCP scan)', nargs='?')
+    pars.add_argument('-S',  default=False, action= 'store_true', dest='is_stackless', help='Use Stackless Python microthread to improve the velocity')
+    pars.add_argument('-o', '--output', action='store_true', default=False, dest='is_save', help='Use this parameter to save your scan result as text')
+    pars.add_argument('-p', dest='port', help='Choose the port you want to scan ,eg: 1-255(range) 1,2,3(specific) 255(single)',
                       nargs=1)
     args_list = pars.parse_args()
 
@@ -79,7 +80,7 @@ if __name__ == '__main__':
     des_port = args_list.port
     is_default_port = 0
     is_save_result = args_list.is_save
-    thread_num = args_list.threads
+    thread_num = args_list.is_stackless
     try:
         if not des_port:
             des_port = default_port

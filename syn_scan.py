@@ -158,14 +158,13 @@ def syn_scan_single(des_ip, des_port):
     # receive:新建套接字接收SYNACK数据包存于pkt
     pkt = b''
     data = ''
-    result = None
+    check_result = None
     raw_socket = socket.socket(socket.PF_PACKET, socket.SOCK_RAW, socket.ntohs(0x0800))
     raw_socket.settimeout(0.05)
 
     try:
         pkt = raw_socket.recv(1024)
     except Exception as e:
-        # print(e)
         pass
     timeout = 3  # test 2 times whether recevied the right packet
     while timeout > 0 or not pkt:
@@ -183,12 +182,11 @@ def syn_scan_single(des_ip, des_port):
             continue
         else:
             data = struct.unpack("!6s6sH20s24s2s", pkt)
-            result = check_synack(data, des_ip, des_port)
-            if result == -1:
+            check_result = check_synack(data, des_ip, des_port)
+            if check_result == -1:
                 continue
-            elif result in (0, 1):
+            elif check_result in (0, 1):
                 break
-
     raw_socket.close()
     s.close()
     if not pkt:

@@ -16,7 +16,8 @@ def send_udp_pkt(des_addr):
     s.close()
     return addr
 
-def udp_scan_single(des_addr):
+def udp_scan_single(ip,port):
+    des_addr = (ip,port)
     src_addr = send_udp_pkt(des_addr)
     result = judge_pkt(des_addr,src_addr)
     return result
