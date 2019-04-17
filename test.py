@@ -162,17 +162,107 @@
 # import socket
 # raw_socket = socket.socket(socket.AF_PACKET, socket.SOCK_RAW, socket.ntohs(0x0800))
 # raw_socket.close()
+#
+# import stackless as st,socket
+#
+# a = [12]
+# result = []
+# def get_host_ip():
+#     try:
+#         ss = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+#         ss.connect(('8.8.8.8', 80))
+#         ip = ss.getsockname()[0]
+#     finally:
+#         ss.close()
+#     return str(ip)
+# #
+# # def rcv_again(s,addr):
+# #     try:
+# #         s.connect(addr)
+#
+# def try_rcv(addr):
+#     global result
+#     s = socket.socket()
+#     s.settimeout(0.005)
+#     # tar = (ip, port)
+#     try:
+#         s.connect(addr)
+#     except socket.timeout:
+#         result.append([addr[1], 'close|filtered'])
+#     except Exception:
+#         result.append([addr[1], 'close'])
+#     else:
+#         result.append([addr[1], 'open'])
+#     finally:
+#         s.close()
+#     return result
+#
+# chnl = st.channel()
+#
+# def show(i,a):
+#     global eg
+#     # print(i,st.current,chnl.queue)
+#     val = chnl.receive()
+#     if val[0] == -1:
+#         pass
+#     elif val[0] != i:
+#         print(i,'send')
+#         chnl.send(val)
+#     else:
+#         print(val[1])
+#         chnl.send((-1,123))
+#         # return
+#     if i == 1:
+#         chnl.send((3,123))
+#     a += [i]
+#     print('now: ',i,st.current)
+#
+# eg = None
+# for i in range(5):
+#     if i == 1:
+#         eg = st.tasklet(show)(i, a)
+#         continue
+#     st.tasklet(show)(i,a)
+# st.tasklet(chnl.send((3,123)))
+# st.run()
+# print(chnl.queue)
+# print(a)
 
-import stackless as st
-a = [12]
-def show(i,a):
-    a += [i]
-    print('now: ',i)
-    # print('now: ',i+1)
-    # print('now: ',i+2)
+# from syn_scan import *
+# from tcp_scan import *
+# from udp_scan import *
+# import stackless as stk
+# import socket,time
+#
+# st_result = []
+# send_chnl = stk.channel()
+# rcvd_chnl = stk.channel()
+#
+# def udp_stk(des_ip,portlis):
+#     pre_port = None
+#
+#     while portlis and pre_port != -1:
+#         temp = portlis.pop(0)
+#         pre_port = temp
+#         src_addr = send_udp_pkt((des_ip,temp))
+#         send_chnl.send(src_addr)
+#
+#         if not portlis:
+#             pre_port = -1
+#
+# def manage_rcv(des_ip):
+#     pass
+#
+#
+#
+#
+# def oo(i):
+#     print('i: ',i)
+#     stk.schedule()
+#     print('oo')
 
-for i in range(10):
-    st.tasklet(show)(i,a)
-
-st.run()
-print(a)
+import socket
+ip = '123.9.9'
+print(socket.inet_ntoa(socket.inet_aton(ip)))
+print('\x1b[5;31;48m' + 'Success!' + '\x1b[0m')
+print('\x1b[5;33;48m' + 'Success!' + '\x1b[0m')

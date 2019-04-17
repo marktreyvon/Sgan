@@ -1,4 +1,4 @@
-import socket,time,threading as th
+import socket,time
 
 def get_host_ip():
     try:
