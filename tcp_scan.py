@@ -1,3 +1,4 @@
+# 模块：TCP connect()扫描
 import socket,time
 
 def get_host_ip():

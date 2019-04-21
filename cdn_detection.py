@@ -1,24 +1,27 @@
-import dns.resolver as d
-import requests as rq,re,time,json
-from bs4 import BeautifulSoup
+# 模块：通过本地/在线DNS来检测CDN
 
-def check_cdn(tar):
-    # 目标域名cdn检测
-    result = []
-    myResolver = d.Resolver()
-    myResolver.lifetime = myResolver.timeout = 2.0
-    dnsserver = [['114.114.114.114'], ['8.8.8.8'], ['208.67.222.222'],['1.0.0.1']]
-    for i in dnsserver:
-        myResolver.nameservers = i
-        try:
-            record = myResolver.query(tar,'A',tcp=True)
-            result.append(record[0].address)
-        except Exception as e:
-            pass
-    return True if len(list(result)) > 1 else False
+# import dns.resolver as d
+import requests as rq,re,time
+# from bs4 import BeautifulSoup
+
+# 利用本地dns查询服务判断CDN，速度较慢，故放弃：
+# def check_cdn(tar):
+#     # 目标域名cdn检测
+#     result = []
+#     myResolver = d.Resolver()
+#     myResolver.lifetime = myResolver.timeout = 2.0
+#     dnsserver = [['114.114.114.114'], ['8.8.8.8'], ['208.67.222.222'],['1.0.0.1']]
+#     for i in dnsserver:
+#         myResolver.nameservers = i
+#         try:
+#             record = myResolver.query(tar,'A',tcp=True)
+#             result.append(record[0].address)
+#         except Exception as e:
+#             pass
+#     return True if len(list(result)) > 1 else False
 
 # 构造HTTP请求在线查找DNS: 查询网站：coding.tools   查询DNS：64.6.64.6
-def check_from_web_CODEINGTOOLS(url):
+def check_from_web_CODINGTOOLS(url):
     hdr = {
     'authority': 'coding.tools',
     'method': 'POST',
@@ -73,25 +76,26 @@ if __name__ == '__main__':
     d1,d2,d3,d4,d5 = '8.8.8.8','208.67.222.222','9.9.9.9','209.244.0.3','64.6.64.6'
     co = []
     t1 = time.time()
-    u1 = 'xusy2333.cn'
+    u1 = 'runoob.com'
     print(u1)
-    check_from_web_CODEINGTOOLS(u1)
+    l = check_from_web_CODINGTOOLS(u1)
+    print(l)
     t2 = time.time()
     co.append([d1,t2-t1])
     print(t2-t1)
-    # check_from_web_CODEINGTOOLS(u1,d2)
+    # check_from_web_CODINGTOOLS(u1,d2)
     # t3 = time.time()
     # co.append([d2,t3-t2])
     # print(t3-t2)
-    # check_from_web_CODEINGTOOLS(u1,d3)
+    # check_from_web_CODINGTOOLS(u1,d3)
     # t4 = time.time()
     # co.append([d3,t4-t3])
     # print(t4-t3)
-    # check_from_web_CODEINGTOOLS(u1,d4)
+    # check_from_web_CODINGTOOLS(u1,d4)
     # t5 = time.time()
     # co.append([d4,t5-t4])
     # print(t5-t4)
-    # check_from_web_CODEINGTOOLS(u1,d5)
+    # check_from_web_CODINGTOOLS(u1,d5)
     # t6 = time.time()
     # co.append([d5,t6-t5])
     # print(t6-t5)
@@ -101,6 +105,6 @@ if __name__ == '__main__':
     # t3 = time.time()
     # print(t3-t2)
     # u2 = 'douban.com'
-    # check_from_web_CODEINGTOOLS(u2)
+    # check_from_web_CODINGTOOLS(u2)
     # u3 = 'xusy2333.cn'
-    # check_from_web_CODEINGTOOLS(u3)
+    # check_from_web_CODINGTOOLS(u3)
