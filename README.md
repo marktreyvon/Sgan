@@ -33,7 +33,9 @@
 - ……
 主要文件都已在文件首标出。
 ### 运行效果：
+    ![](https://github.com/marktreyvon/Sgan/blob/master/help.png)
     
+    ![](https://github.com/marktreyvon/Sgan/blob/master/sgan.png)
     
 
 ## 遇到的问题：
