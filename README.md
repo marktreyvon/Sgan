@@ -36,9 +36,7 @@
 
 ![](https://github.com/marktreyvon/Sgan/blob/master/img/help.png)
     
-<div>![](img/sgan.png)</div>
-    
-<div><img src=img/help.png></div>
+![](https://github.com/marktreyvon/Sgan/blob/master/img/sgan.png)
     
 
 ## 遇到的问题：
