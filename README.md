@@ -33,9 +33,8 @@
 - ……
 主要文件都已在文件首标出。
 ### 运行效果：
-    ![](https://github.com/marktreyvon/Sgan/blob/master/help.png)
     
-    ![](https://github.com/marktreyvon/Sgan/blob/master/sgan.png)
+    
 
 ## 遇到的问题：
 1. Windows系统不支持通过socket.PF_PACKET从数据链路层获取数据包，需要另寻他法。这意味着SYN扫描在Windows上不能得到正确的结果
