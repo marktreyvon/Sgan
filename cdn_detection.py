@@ -54,15 +54,6 @@ def check_from_web_CODINGTOOLS(url):
     except Exception:
         print('search error')
     return ip_list
-    # if len(ip_list)==1:
-    #     print("The URL don't use CDN, IP: ",end='')
-    #     print(ip_list[0])
-    #     return (True , ip_list)
-    # else:
-    #     print("The URL used CDN: ")
-    #     for i in ip_list:
-    #         print("IP： ",i)
-    #     return (True,ip_list)
 
 # 从在线DNS返回的数据中返回结果：
 def find_ip(s):

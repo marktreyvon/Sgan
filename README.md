@@ -4,8 +4,21 @@
 
 ## 一个简单的端口扫描软件，附带杂七杂八的功能。
 
+## 方法：
+
+1. `git clone https://github.com/marktreyvon/Sgan.git` 
+2. `python Sgan.py -h`
+
+## 软件环境：Kali_2018.4_amd64 + Python3 +stackless Python（暂不支持Windows）
+
+### Python 库：requests,bs4(BeautifulSoup)
+
+**Kali 默认没有安装stackless python，需要自行配置。**
+
 ## 致谢：
+
 - [PortScanner](https://github.com/se55i0n/PortScanner)  
+- [FuzzScanner](https://github.com/TideSec/FuzzScanner)
 
 ### 已实现：
 
@@ -20,13 +33,8 @@
 - ……
 主要文件都已在文件首标出。
 ### 运行效果：
-    ![](https://raw.githubusercontent.com/marktreyvon/Sgan/master/Snipaste1.png)
-
-## 软件环境：Kali_2018.4_amd64 + Python3 +stackless Python（暂不支持Windows）
-
-### Python 库：requests,bs4(BeautifulSoup)
-    
-**Kali 默认没有安装stackless python，需要自行配置。**
+    ![？](https://raw.githubusercontent.com/marktreyvon/Sgan/master/Snipaste1.png)
+    ![？](Snipaste1.png)
 
 ## 遇到的问题：
 1. Windows系统不支持通过socket.PF_PACKET从数据链路层获取数据包，需要另寻他法。这意味着SYN扫描在Windows上不能得到正确的结果
